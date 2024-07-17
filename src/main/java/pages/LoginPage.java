@@ -1,10 +1,10 @@
 package pages;
 
 import java.io.IOException;
-import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import utility.BaseTest;
 import utility.GenericMethods;
@@ -20,6 +20,8 @@ public class LoginPage {
 	By loginBtn = By.xpath("//input[@type='submit' and @value='Login']");
 	By homeMenu = By.xpath("/html/body/table[1]/tbody/tr[1]/td/table/tbody/tr/td[2]/a");
 	By logoutLink = By.xpath("//a[contains(text(),'Logout')]");
+	By logo = By.xpath("//td[text()='CRMPRO']");
+	By menuBar = By.xpath("//div[@id='navmenu']");
 	
 	public LoginPage(WebDriver driver) 
 	{
@@ -43,10 +45,11 @@ public class LoginPage {
 	{
 		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		Thread.sleep(1000);
-//		String tex = genM.grabText(homeMenu);
-//		System.out.println(tex);'
-		genM.doClick(homeMenu);
-
+		System.out.println(driver.getTitle());
+		WebElement menu = genM.searchElement(menuBar);
+		String tex = menu.findElement(logo).getText();
+		System.out.println(tex);
+		menu.findElement(logo).click();
 	}
 	
 	public boolean validateLogout()
